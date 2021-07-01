@@ -1,9 +1,9 @@
-from blog.serializers import BlogSerializer
+from blog.serializers import PostSerializer
 from rest_framework import viewsets
-from .models import Blog
+from .models import Post
 # Create your views here.
 
 
 class BlogViewSet(viewsets.ModelViewSet):
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
