@@ -1,4 +1,4 @@
-# Django Ecommerce App
+# Django with MongoDB
 
 ## Description
 
