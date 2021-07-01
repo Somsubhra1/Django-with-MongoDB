@@ -78,13 +78,37 @@ WSGI_APPLICATION = 'django_mongodb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': os.environ.get('DB_NAME'),
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': os.environ.get('DB_HOST'),
+            'port': int(os.environ.get('DB_PORT')),
+            'username': os.environ.get('DB_USER'),
+            'password': os.environ.get('DB_PASS'),
+            'authSource': 'db-name',
+            'authMechanism': 'SCRAM-SHA-1'
+        },
+        'LOGGING': {
+            'version': 1,
+            'loggers': {
+                'djongo': {
+                    'level': 'DEBUG',
+                    'propagate': False,
+                }
+            },
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
